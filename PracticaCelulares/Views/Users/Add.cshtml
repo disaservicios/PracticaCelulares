@@ -13,15 +13,17 @@
             @Html.ValidationMessage("error", new { @class = "text-danger" })
 
 
-            @Html.LabelFor(u => u.UserName)            
+            @Html.LabelFor(u => u.UserName)
             @*@Html.TextBoxFor(d => d.UserName = "", new { @class = "form-control" })*@
             <input class="form-control" id="UserName" name="UserName" type="text" value="" />
 
-            @*@Html.LabelFor(u => u.UserLogin)
-            @Html.TextBoxFor(u => u.UserLogin, new { @class = "form-control" })
+            @Html.LabelFor(u => u.UserLogin)
+            @*@Html.TextBoxFor(u => u.UserLogin, new { @class = "form-control" })*@
+            <input class="form-control" id="UserLogin" name="UserLogin" type="text" value="" />
 
             @Html.LabelFor(u => u.Phone)
-            @Html.TextBoxFor(u => u.Phone, new { @class = "form-control" })*@
+            @*@Html.TextBoxFor(u => u.Phone, new { @class = "form-control" })*@
+            <input class="form-control" id="Phone" name="Phone" type="text" value="" />
 
             @Html.LabelFor(u => u.Passwordkey)
             @Html.PasswordFor(u => u.Passwordkey, new { @class = "form-control" })

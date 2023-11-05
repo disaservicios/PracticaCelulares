@@ -50,18 +50,25 @@ namespace PracticaCelulares.Controllers
         [HttpPost]
         public ActionResult Add(cUsers usersEdit)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(usersEdit);
-            }
+            usersEdit.Rol_Descripcion = "1";
+            usersEdit.Tipo_Descripcion = "1";
+
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(usersEdit);
+            //}
 
             using(var con = new MSSQL_Practica_LlamadasEntities())
             {
                 Users bdUser = new Users();
+                bdUser.Activo = 1;
                 bdUser.UserName = usersEdit.UserName;
                 bdUser.UserLogin = usersEdit.UserLogin;
                 bdUser.Passwordkey = usersEdit.Passwordkey;
                 bdUser.Phone = usersEdit.Phone;
+
+                bdUser.Id_Rol = 1;
+                bdUser.Id_Tipo_Usuario = 1;
 
                 con.Users.Add(bdUser);
                 con.SaveChanges();
