@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cd142542063e449da3c2dc73f9794abd" Name="Diagram1">
+        <EntityTypeShape EntityType="MSSQL_Practica_LlamadasModel.Call_Detail" Width="1.5" PointX="5" PointY="5" />
+        <EntityTypeShape EntityType="MSSQL_Practica_LlamadasModel.Mobile_Line" Width="1.5" PointX="2.75" PointY="5.5" />
+        <EntityTypeShape EntityType="MSSQL_Practica_LlamadasModel.Roles" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="MSSQL_Practica_LlamadasModel.Tipo_Usuario" Width="1.5" PointX="0.75" PointY="5.5" />
+        <EntityTypeShape EntityType="MSSQL_Practica_LlamadasModel.Users" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="MSSQL_Practica_LlamadasModel.Vw_Users" Width="1.5" PointX="5.75" PointY="0.75" />
+        <AssociationConnector Association="MSSQL_Practica_LlamadasModel.FK_Mobile_Line_Call_Detail" />
+        <AssociationConnector Association="MSSQL_Practica_LlamadasModel.FK_Roles_Users" />
+        <AssociationConnector Association="MSSQL_Practica_LlamadasModel.FK_Tipo_Usuario_Users" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

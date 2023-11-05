@@ -1,0 +1,43 @@
+﻿
+@model List<PracticaCelulares.Models.DTO.UsersDTO>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Usuarios</h2>
+<div class="row">
+    <div class="col-md-12">
+        <input type="button" class="btn btn-primary" onclick="document.location.href='@Url.Content("~/Users/Add")'" value="Agregar" />
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered">
+            <tr>
+                
+                <th>Nombre del Usuario</th>
+                <th>Usuario(Login)</th>
+                <th>Contraseña</th>
+                <th>Tipo de Usuario</th>
+                <th>Rol</th>
+                <th>Teléfono</th>
+            </tr>
+            @foreach (var Elemento in Model)
+            {
+                <tr>
+
+                    <td>@Elemento.UserName</td>
+                    <td>@Elemento.UserLogin</td>
+                    <td>@Elemento.Passwordkey</td>
+                    <td>@Elemento.Tipo_Descripcion</td>
+                    <td>@Elemento.Rol_Descripcion</td>
+                    <td>@Elemento.Phone</td>
+
+
+                </tr>
+            }
+        </table>
+
+    </div>
+</div>

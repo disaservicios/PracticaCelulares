@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MSSQL_Practica_LlamadasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Call_Detail">
+          <Key>
+            <PropertyRef Name="Id_Call_Detail" />
+          </Key>
+          <Property Name="Id_Call_Detail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CallDetailId" Type="int" Nullable="false" />
+          <Property Name="Id_Mobile_Line" Type="int" Nullable="false" />
+          <Property Name="MobileLine" Type="int" Nullable="false" />
+          <Property Name="CalledPartyNumber" Type="int" Nullable="false" />
+          <Property Name="CalledPartyDescription" Type="varchar" MaxLength="20" />
+          <Property Name="DateTime" Type="smalldatetime" Nullable="false" />
+          <Property Name="Duration" Type="int" Nullable="false" />
+          <Property Name="TotalCost" Type="money" />
+        </EntityType>
+        <EntityType Name="Mobile_Line">
+          <Key>
+            <PropertyRef Name="Id_Mobile_Line" />
+          </Key>
+          <Property Name="Id_Mobile_Line" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MobileLineId" Type="int" Nullable="false" />
+          <Property Name="MobileLine" Type="int" Nullable="false" />
+          <Property Name="CalledPartyDescription" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id_Rol" />
+          </Key>
+          <Property Name="Id_Rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rol_Descripcion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Activo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tipo_Usuario">
+          <Key>
+            <PropertyRef Name="Id_Tipo_Usuario" />
+          </Key>
+          <Property Name="Id_Tipo_Usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tipo_Descripcion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Activo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id_User" />
+          </Key>
+          <Property Name="Id_User" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Rol" Type="int" Nullable="false" />
+          <Property Name="Id_Tipo_Usuario" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="UserLogin" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Passwordkey" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Activo" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'MSSQL_Practica_Llamadas.dbo.Vw_Users' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Vw_Users">
+          <Key>
+            <PropertyRef Name="Id_User" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="UserLogin" />
+            <PropertyRef Name="Passwordkey" />
+            <PropertyRef Name="Tipo_Descripcion" />
+            <PropertyRef Name="Rol_Descripcion" />
+            <PropertyRef Name="Phone" />
+          </Key>
+          <Property Name="Id_User" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="UserLogin" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Passwordkey" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Tipo_Descripcion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Rol_Descripcion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Mobile_Line_Call_Detail">
+          <End Role="Mobile_Line" Type="Self.Mobile_Line" Multiplicity="1" />
+          <End Role="Call_Detail" Type="Self.Call_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mobile_Line">
+              <PropertyRef Name="Id_Mobile_Line" />
+            </Principal>
+            <Dependent Role="Call_Detail">
+              <PropertyRef Name="Id_Mobile_Line" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles_Users">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id_Rol" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Id_Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tipo_Usuario_Users">
+          <End Role="Tipo_Usuario" Type="Self.Tipo_Usuario" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Usuario">
+              <PropertyRef Name="Id_Tipo_Usuario" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Id_Tipo_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MSSQL_Practica_LlamadasModelStoreContainer">
+          <EntitySet Name="Call_Detail" EntityType="Self.Call_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mobile_Line" EntityType="Self.Mobile_Line" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipo_Usuario" EntityType="Self.Tipo_Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vw_Users" EntityType="Self.Vw_Users" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Vw_Users].[Id_User] AS [Id_User], 
+    [Vw_Users].[UserName] AS [UserName], 
+    [Vw_Users].[UserLogin] AS [UserLogin], 
+    [Vw_Users].[Passwordkey] AS [Passwordkey], 
+    [Vw_Users].[Tipo_Descripcion] AS [Tipo_Descripcion], 
+    [Vw_Users].[Rol_Descripcion] AS [Rol_Descripcion], 
+    [Vw_Users].[Phone] AS [Phone]
+    FROM [dbo].[Vw_Users] AS [Vw_Users]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Mobile_Line_Call_Detail" Association="Self.FK_Mobile_Line_Call_Detail">
+            <End Role="Mobile_Line" EntitySet="Mobile_Line" />
+            <End Role="Call_Detail" EntitySet="Call_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_Users" Association="Self.FK_Roles_Users">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tipo_Usuario_Users" Association="Self.FK_Tipo_Usuario_Users">
+            <End Role="Tipo_Usuario" EntitySet="Tipo_Usuario" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MSSQL_Practica_LlamadasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MSSQL_Practica_LlamadasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Call_Detail" EntityType="MSSQL_Practica_LlamadasModel.Call_Detail" />
+          <EntitySet Name="Mobile_Line" EntityType="MSSQL_Practica_LlamadasModel.Mobile_Line" />
+          <EntitySet Name="Roles" EntityType="MSSQL_Practica_LlamadasModel.Roles" />
+          <EntitySet Name="Tipo_Usuario" EntityType="MSSQL_Practica_LlamadasModel.Tipo_Usuario" />
+          <EntitySet Name="Users" EntityType="MSSQL_Practica_LlamadasModel.Users" />
+          <EntitySet Name="Vw_Users" EntityType="MSSQL_Practica_LlamadasModel.Vw_Users" />
+          <AssociationSet Name="FK_Mobile_Line_Call_Detail" Association="MSSQL_Practica_LlamadasModel.FK_Mobile_Line_Call_Detail">
+            <End Role="Mobile_Line" EntitySet="Mobile_Line" />
+            <End Role="Call_Detail" EntitySet="Call_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_Users" Association="MSSQL_Practica_LlamadasModel.FK_Roles_Users">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tipo_Usuario_Users" Association="MSSQL_Practica_LlamadasModel.FK_Tipo_Usuario_Users">
+            <End Role="Tipo_Usuario" EntitySet="Tipo_Usuario" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Call_Detail">
+          <Key>
+            <PropertyRef Name="Id_Call_Detail" />
+          </Key>
+          <Property Name="Id_Call_Detail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CallDetailId" Type="Int32" Nullable="false" />
+          <Property Name="Id_Mobile_Line" Type="Int32" Nullable="false" />
+          <Property Name="MobileLine" Type="Int32" Nullable="false" />
+          <Property Name="CalledPartyNumber" Type="Int32" Nullable="false" />
+          <Property Name="CalledPartyDescription" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
+          <Property Name="TotalCost" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Mobile_Line" Relationship="MSSQL_Practica_LlamadasModel.FK_Mobile_Line_Call_Detail" FromRole="Call_Detail" ToRole="Mobile_Line" />
+        </EntityType>
+        <EntityType Name="Mobile_Line">
+          <Key>
+            <PropertyRef Name="Id_Mobile_Line" />
+          </Key>
+          <Property Name="Id_Mobile_Line" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MobileLineId" Type="Int32" Nullable="false" />
+          <Property Name="MobileLine" Type="Int32" Nullable="false" />
+          <Property Name="CalledPartyDescription" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Call_Detail" Relationship="MSSQL_Practica_LlamadasModel.FK_Mobile_Line_Call_Detail" FromRole="Mobile_Line" ToRole="Call_Detail" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id_Rol" />
+          </Key>
+          <Property Name="Id_Rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rol_Descripcion" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="MSSQL_Practica_LlamadasModel.FK_Roles_Users" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Tipo_Usuario">
+          <Key>
+            <PropertyRef Name="Id_Tipo_Usuario" />
+          </Key>
+          <Property Name="Id_Tipo_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tipo_Descripcion" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="MSSQL_Practica_LlamadasModel.FK_Tipo_Usuario_Users" FromRole="Tipo_Usuario" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id_User" />
+          </Key>
+          <Property Name="Id_User" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Rol" Type="Int32" Nullable="false" />
+          <Property Name="Id_Tipo_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserLogin" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Passwordkey" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Roles" Relationship="MSSQL_Practica_LlamadasModel.FK_Roles_Users" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="Tipo_Usuario" Relationship="MSSQL_Practica_LlamadasModel.FK_Tipo_Usuario_Users" FromRole="Users" ToRole="Tipo_Usuario" />
+        </EntityType>
+        <EntityType Name="Vw_Users">
+          <Key>
+            <PropertyRef Name="Id_User" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="UserLogin" />
+            <PropertyRef Name="Passwordkey" />
+            <PropertyRef Name="Tipo_Descripcion" />
+            <PropertyRef Name="Rol_Descripcion" />
+            <PropertyRef Name="Phone" />
+          </Key>
+          <Property Name="Id_User" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserLogin" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Passwordkey" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo_Descripcion" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Rol_Descripcion" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Mobile_Line_Call_Detail">
+          <End Type="MSSQL_Practica_LlamadasModel.Mobile_Line" Role="Mobile_Line" Multiplicity="1" />
+          <End Type="MSSQL_Practica_LlamadasModel.Call_Detail" Role="Call_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mobile_Line">
+              <PropertyRef Name="Id_Mobile_Line" />
+            </Principal>
+            <Dependent Role="Call_Detail">
+              <PropertyRef Name="Id_Mobile_Line" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles_Users">
+          <End Type="MSSQL_Practica_LlamadasModel.Roles" Role="Roles" Multiplicity="1" />
+          <End Type="MSSQL_Practica_LlamadasModel.Users" Role="Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id_Rol" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Id_Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tipo_Usuario_Users">
+          <End Type="MSSQL_Practica_LlamadasModel.Tipo_Usuario" Role="Tipo_Usuario" Multiplicity="1" />
+          <End Type="MSSQL_Practica_LlamadasModel.Users" Role="Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Usuario">
+              <PropertyRef Name="Id_Tipo_Usuario" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Id_Tipo_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MSSQL_Practica_LlamadasModelStoreContainer" CdmEntityContainer="MSSQL_Practica_LlamadasEntities">
+          <EntitySetMapping Name="Call_Detail">
+            <EntityTypeMapping TypeName="MSSQL_Practica_LlamadasModel.Call_Detail">
+              <MappingFragment StoreEntitySet="Call_Detail">
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="CalledPartyDescription" ColumnName="CalledPartyDescription" />
+                <ScalarProperty Name="CalledPartyNumber" ColumnName="CalledPartyNumber" />
+                <ScalarProperty Name="MobileLine" ColumnName="MobileLine" />
+                <ScalarProperty Name="Id_Mobile_Line" ColumnName="Id_Mobile_Line" />
+                <ScalarProperty Name="CallDetailId" ColumnName="CallDetailId" />
+                <ScalarProperty Name="Id_Call_Detail" ColumnName="Id_Call_Detail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mobile_Line">
+            <EntityTypeMapping TypeName="MSSQL_Practica_LlamadasModel.Mobile_Line">
+              <MappingFragment StoreEntitySet="Mobile_Line">
+                <ScalarProperty Name="CalledPartyDescription" ColumnName="CalledPartyDescription" />
+                <ScalarProperty Name="MobileLine" ColumnName="MobileLine" />
+                <ScalarProperty Name="MobileLineId" ColumnName="MobileLineId" />
+                <ScalarProperty Name="Id_Mobile_Line" ColumnName="Id_Mobile_Line" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="MSSQL_Practica_LlamadasModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Rol_Descripcion" ColumnName="Rol_Descripcion" />
+                <ScalarProperty Name="Id_Rol" ColumnName="Id_Rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_Usuario">
+            <EntityTypeMapping TypeName="MSSQL_Practica_LlamadasModel.Tipo_Usuario">
+              <MappingFragment StoreEntitySet="Tipo_Usuario">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Tipo_Descripcion" ColumnName="Tipo_Descripcion" />
+                <ScalarProperty Name="Id_Tipo_Usuario" ColumnName="Id_Tipo_Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MSSQL_Practica_LlamadasModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Passwordkey" ColumnName="Passwordkey" />
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id_Tipo_Usuario" ColumnName="Id_Tipo_Usuario" />
+                <ScalarProperty Name="Id_Rol" ColumnName="Id_Rol" />
+                <ScalarProperty Name="Id_User" ColumnName="Id_User" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vw_Users">
+            <EntityTypeMapping TypeName="MSSQL_Practica_LlamadasModel.Vw_Users">
+              <MappingFragment StoreEntitySet="Vw_Users">
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Rol_Descripcion" ColumnName="Rol_Descripcion" />
+                <ScalarProperty Name="Tipo_Descripcion" ColumnName="Tipo_Descripcion" />
+                <ScalarProperty Name="Passwordkey" ColumnName="Passwordkey" />
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id_User" ColumnName="Id_User" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
