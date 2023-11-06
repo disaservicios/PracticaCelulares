@@ -1,0 +1,30 @@
+﻿
+@model List<PracticaCelulares.Models.DTO.Mobile_Line>
+@{
+    ViewBag.Title = "ListCell";
+}
+
+<h2>Listado de Celulares</h2>
+
+<br />
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>Celular</th>
+                <th>Descripcion</th>
+                
+            </tr>
+            @foreach (var Elemento in Model)
+            {
+                <tr>
+                    <td>@Elemento.MobileLine</td>
+                    <td>@Elemento.Descr</td>
+                  
+                </tr>
+            }
+        </table>
+
+    </div>
+</div>
+

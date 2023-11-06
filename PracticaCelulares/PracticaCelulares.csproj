@@ -128,8 +128,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CerrarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LlamadasController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Filters\VerifySession.cs" />
@@ -140,6 +140,9 @@
       <DependentUpon>PracticaLlamadasDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DTOCrud\cUsers.cs" />
+    <Compile Include="Models\DTO\Mobile_Line.cs" />
+    <Compile Include="Models\DTO\RolesDTO.cs" />
+    <Compile Include="Models\DTO\Tipo_UsuarioDTO.cs" />
     <Compile Include="Models\DTO\UsersDTO.cs" />
     <Compile Include="Models\Mobile_Line.cs">
       <DependentUpon>PracticaLlamadasDB.tt</DependentUpon>
@@ -230,10 +233,12 @@
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Add.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\ListCell.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Llamadas\" />
+    <Folder Include="Views\Cerrar\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -15,14 +15,14 @@ namespace PracticaCelulares.Models
     public partial class Call_Detail
     {
         public int Id_Call_Detail { get; set; }
-        public int CallDetailId { get; set; }
+        public string CallDetailId { get; set; }
         public int Id_Mobile_Line { get; set; }
-        public int MobileLine { get; set; }
-        public int CalledPartyNumber { get; set; }
+        public string MobileLine { get; set; }
+        public string CalledPartyNumber { get; set; }
         public string CalledPartyDescription { get; set; }
         public System.DateTime DateTime { get; set; }
         public int Duration { get; set; }
-        public Nullable<decimal> TotalCost { get; set; }
+        public decimal TotalCost { get; set; }
     
         public virtual Mobile_Line Mobile_Line { get; set; }
     }

@@ -15,24 +15,29 @@
     <div class="col-lg-12">
         <table class="table table-bordered">
             <tr>
-                
+                <th>#</th>
                 <th>Nombre del Usuario</th>
                 <th>Usuario(Login)</th>
                 <th>Contraseña</th>
                 <th>Tipo de Usuario</th>
                 <th>Rol</th>
                 <th>Teléfono</th>
+                <th>Acción</th>
             </tr>
             @foreach (var Elemento in Model)
             {
                 <tr>
-
+                    <td>@Elemento.Id_User</td>
                     <td>@Elemento.UserName</td>
                     <td>@Elemento.UserLogin</td>
                     <td>@Elemento.Passwordkey</td>
                     <td>@Elemento.Tipo_Descripcion</td>
                     <td>@Elemento.Rol_Descripcion</td>
                     <td>@Elemento.Phone</td>
+                    <td>
+                        <input type="button" class="btn btn-danger" onclick="jsDelete(@Elemento.Id_User)" ; value="Eliminar" />
+                        <input onclick="document.location.href='@Url.Content("~/Users/Edit/"+Elemento.Id_User)'" type="button" class="btn btn-default" value="Editar" />
+                    </td>
 
 
                 </tr>
@@ -41,3 +46,20 @@
 
     </div>
 </div>
+
+<script>
+    function jsDelete(id) {
+        if (confirm("Deseas eliminar el registro seleccionado")) {
+
+        
+        url = "@Url.Content("~/Users/Delete")"+"/"+id;
+        $.post(url, function (data) {
+            if (data == "1") {
+                document.location.href="@Url.Content("~/Users/")"
+            } else {
+                alert("Error en la eliminación")
+            }
+        })
+       }
+    }
+</script>

@@ -22,8 +22,8 @@ namespace PracticaCelulares.Models
     
         public int Id_Mobile_Line { get; set; }
         public int MobileLineId { get; set; }
-        public int MobileLine { get; set; }
-        public string CalledPartyDescription { get; set; }
+        public string MobileLine { get; set; }
+        public string Descr { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Call_Detail> Call_Detail { get; set; }

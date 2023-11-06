@@ -1,0 +1,45 @@
+﻿@model PracticaCelulares.Models.DTOCrud.EditcUsers
+@{
+    ViewBag.Title = "Editar Usuario";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { role = "form", @class = "" }))
+        {
+            @Html.HiddenFor(editcUsers => editcUsers.Id_User)
+            @Html.AntiForgeryToken()
+            @Html.ValidationMessage("error", new { @class = "text-danger" })
+
+
+            @Html.LabelFor(editcUsers => editcUsers.UserName)
+            @Html.TextBoxFor(editcUsers => editcUsers.UserName, new { @class = "form-control" })
+            @Html.ValidationMessage("UserName", new { @class = "text-danger" })<br />
+
+            @Html.LabelFor(editcUsers => editcUsers.UserLogin)
+            @Html.TextBoxFor(editcUsers => editcUsers.UserLogin, new { @class = "form-control" })
+            @Html.ValidationMessage("UserLogin", new { @class = "text-danger" })<br />
+
+            @Html.LabelFor(editcUsers => editcUsers.Phone)
+            @Html.TextBoxFor(editcUsers => editcUsers.Phone, new { @class = "form-control" })
+            @Html.ValidationMessage("Phone", new { @class = "text-danger" })<br />
+
+
+            @Html.LabelFor(editcUsers => editcUsers.Passwordkey)
+            @Html.PasswordFor(editcUsers => editcUsers.Passwordkey, new { @class = "form-control" })
+            @Html.ValidationMessage("Passwordkey", new { @class = "text-danger" })<br />
+
+            @Html.LabelFor(editcUsers => editcUsers.ConfirmPasswordkey)
+            @Html.PasswordFor(editcUsers => editcUsers.ConfirmPasswordkey, new { @class = "form-control" })
+            @Html.ValidationMessage("ConfirmPasswordkey", new { @class = "text-danger" })<br />
+
+            <div style="text-align:right">
+                <input type="submit" class="btn btn-success" value="Guardar" />
+            </div>
+
+        }
+
+    </div>
+</div>

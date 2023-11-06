@@ -10,14 +10,14 @@
             <PropertyRef Name="Id_Call_Detail" />
           </Key>
           <Property Name="Id_Call_Detail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CallDetailId" Type="int" Nullable="false" />
+          <Property Name="CallDetailId" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Id_Mobile_Line" Type="int" Nullable="false" />
-          <Property Name="MobileLine" Type="int" Nullable="false" />
-          <Property Name="CalledPartyNumber" Type="int" Nullable="false" />
-          <Property Name="CalledPartyDescription" Type="varchar" MaxLength="20" />
-          <Property Name="DateTime" Type="smalldatetime" Nullable="false" />
+          <Property Name="MobileLine" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CalledPartyNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CalledPartyDescription" Type="varchar" MaxLength="50" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
           <Property Name="Duration" Type="int" Nullable="false" />
-          <Property Name="TotalCost" Type="money" />
+          <Property Name="TotalCost" Type="money" Nullable="false" />
         </EntityType>
         <EntityType Name="Mobile_Line">
           <Key>
@@ -25,8 +25,8 @@
           </Key>
           <Property Name="Id_Mobile_Line" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MobileLineId" Type="int" Nullable="false" />
-          <Property Name="MobileLine" Type="int" Nullable="false" />
-          <Property Name="CalledPartyDescription" Type="varchar" MaxLength="20" />
+          <Property Name="MobileLine" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Descr" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -172,14 +172,14 @@ advertencia 6002: La tabla o vista 'MSSQL_Practica_Llamadas.dbo.Vw_Users' no tie
             <PropertyRef Name="Id_Call_Detail" />
           </Key>
           <Property Name="Id_Call_Detail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CallDetailId" Type="Int32" Nullable="false" />
+          <Property Name="CallDetailId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Id_Mobile_Line" Type="Int32" Nullable="false" />
-          <Property Name="MobileLine" Type="Int32" Nullable="false" />
-          <Property Name="CalledPartyNumber" Type="Int32" Nullable="false" />
-          <Property Name="CalledPartyDescription" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="MobileLine" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CalledPartyNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CalledPartyDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Duration" Type="Int32" Nullable="false" />
-          <Property Name="TotalCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TotalCost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <NavigationProperty Name="Mobile_Line" Relationship="MSSQL_Practica_LlamadasModel.FK_Mobile_Line_Call_Detail" FromRole="Call_Detail" ToRole="Mobile_Line" />
         </EntityType>
         <EntityType Name="Mobile_Line">
@@ -188,8 +188,8 @@ advertencia 6002: La tabla o vista 'MSSQL_Practica_Llamadas.dbo.Vw_Users' no tie
           </Key>
           <Property Name="Id_Mobile_Line" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MobileLineId" Type="Int32" Nullable="false" />
-          <Property Name="MobileLine" Type="Int32" Nullable="false" />
-          <Property Name="CalledPartyDescription" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MobileLine" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Descr" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Call_Detail" Relationship="MSSQL_Practica_LlamadasModel.FK_Mobile_Line_Call_Detail" FromRole="Mobile_Line" ToRole="Call_Detail" />
         </EntityType>
         <EntityType Name="Roles">
@@ -303,7 +303,7 @@ advertencia 6002: La tabla o vista 'MSSQL_Practica_Llamadas.dbo.Vw_Users' no tie
           <EntitySetMapping Name="Mobile_Line">
             <EntityTypeMapping TypeName="MSSQL_Practica_LlamadasModel.Mobile_Line">
               <MappingFragment StoreEntitySet="Mobile_Line">
-                <ScalarProperty Name="CalledPartyDescription" ColumnName="CalledPartyDescription" />
+                <ScalarProperty Name="Descr" ColumnName="Descr" />
                 <ScalarProperty Name="MobileLine" ColumnName="MobileLine" />
                 <ScalarProperty Name="MobileLineId" ColumnName="MobileLineId" />
                 <ScalarProperty Name="Id_Mobile_Line" ColumnName="Id_Mobile_Line" />
